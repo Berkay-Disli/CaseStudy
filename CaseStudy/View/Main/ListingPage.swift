@@ -48,6 +48,7 @@ struct ListingPage: View {
                                     .onTapGesture {
                                         withAnimation(.easeInOut) {
                                             selectedCategory = category
+                                            dataVM.showDesiredCategoryTemplates(category: category)
                                         }
                                     }
                                 Capsule().fill(selectedCategory == category ? .black:.clear)
@@ -64,11 +65,16 @@ struct ListingPage: View {
             
             // Templates Showcase
             ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(1...20, id: \.self) { template in
-                        CoverImageComp()
-                            .padding([.bottom], 10)
+                if !dataVM.templatesByCategory.isEmpty {
+                    LazyVGrid(columns: columns) {
+                        ForEach(dataVM.templatesByCategory, id: \.self) { template in
+                            CoverImageComp(imageUrl: template.templateCoverImageUrlString)
+                                .padding([.bottom], 10)
+                        }
                     }
+                    .transition(AnyTransition.opacity.animation(.easeInOut))
+                } else {
+                    ProgressView()
                 }
             }
             

@@ -32,6 +32,7 @@ class DataViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.templates = result
                     self.setCategories()
+                    self.showDesiredCategoryTemplates(category: "Birthday")
                 }
             } catch let error {
                 print(error.localizedDescription)

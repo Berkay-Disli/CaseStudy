@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CoverImageComp: View {
+    let imageUrl: String
+    
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Color.gray
+            KFImage(URL(string: imageUrl))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
             
             Image(systemName: "suit.diamond")
                 .font(.caption)
@@ -40,6 +45,6 @@ struct CoverImageComp: View {
 
 struct CoverImageComp_Previews: PreviewProvider {
     static var previews: some View {
-        CoverImageComp()
+        CoverImageComp(imageUrl: "")
     }
 }
