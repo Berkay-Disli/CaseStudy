@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct SubscriptionPage: View {
+    @State private var selection: Subscription = .monthly
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         ZStack {
             Color.gray.opacity(0.2).ignoresSafeArea()
             VStack {
+                Text("Subscription")
+                    .font(.title2).bold()
                 ZStack(alignment: .leading) {
                     Image("girl")
                         .resizable()
@@ -60,6 +64,47 @@ struct SubscriptionPage: View {
                     
                     Text("Take part and enjoy this beautiful application.")
                 }
+                .padding(.top, 30)
+                
+                HStack {
+                    ForEach(Subscription.allCases, id: \.self) { item in
+                        VStack(spacing: 2) {
+                            Text(item.title)
+                            Text("$\(item.price)")
+                                .font(.title).bold()
+                        }
+                        .foregroundColor(selection == item ? .white:.black)
+                        .frame(width: 130, height: 100)
+                        .background(selection == item ? .black:.white)
+                        .cornerRadius(10)
+                        .onTapGesture {
+                            withAnimation(.easeInOut) {
+                                selection = item
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 20)
+                
+                Button(action: {}, label: {
+                    Text("Start Now")
+                        .font(.title2).bold()
+                        .foregroundColor(.white)
+                        .frame(width: UIScreen.main.bounds.width - 20, height: 60)
+                        .background(.black)
+                        .cornerRadius(10)
+                        .padding(.top)
+                })
+                
+                Text("Cancel whenever you want, hopefully not.")
+                
+                Spacer()
+                HStack(spacing: 30) {
+                    Text("Privacy Policy").bold()
+                    Text("Terms of Use").bold()
+                }
+                .foregroundColor(.black)
+                .padding(.bottom)
                 
                 
                     .navigationBarHidden(true)
