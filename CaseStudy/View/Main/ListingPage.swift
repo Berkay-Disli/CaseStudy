@@ -11,6 +11,7 @@ struct ListingPage: View {
     @StateObject var dataVM = DataViewModel()
     @State private var selectedCategory = "Birthday"
     @ObservedObject var sideMenuNav: NavigationVM
+    @ObservedObject var dataVisual: DataVisuals
     
     let columns: [GridItem] = [GridItem(.flexible(), spacing: -20, alignment: .center),
                                GridItem(.flexible(), spacing: -20, alignment: .center)]
@@ -76,13 +77,22 @@ struct ListingPage: View {
                 // Templates Showcase
                 ScrollView {
                     if !dataVM.templatesByCategory.isEmpty {
-                        LazyVGrid(columns: columns) {
-                            ForEach(dataVM.templatesByCategory, id: \.self) { template in
-                                CoverImageComp(imageUrl: template.templateCoverImageUrlString)
-                                    .padding([.bottom], 10)
+                        if !dataVisual.showSingleItems {
+                            LazyVGrid(columns: columns) {
+                                ForEach(dataVM.templatesByCategory, id: \.self) { template in
+                                    CoverImageComp(dataVisual: dataVisual, imageUrl: template.templateCoverImageUrlString)
+                                        .padding([.bottom], 10)
+                                }
+                            }
+                            .transition(AnyTransition.opacity.animation(.easeInOut))
+                        } else {
+                            LazyVStack {
+                                ForEach(dataVM.templatesByCategory, id: \.self) { template in
+                                    CoverImageComp(dataVisual: dataVisual, imageUrl: template.templateCoverImageUrlString)
+                                        .padding([.bottom], 10)
+                                }
                             }
                         }
-                        .transition(AnyTransition.opacity.animation(.easeInOut))
                     } else {
                         ProgressView()
                     }
@@ -95,6 +105,6 @@ struct ListingPage: View {
 
 struct ListingPage_Previews: PreviewProvider {
     static var previews: some View {
-        ListingPage(sideMenuNav: NavigationVM())
+        ListingPage(sideMenuNav: NavigationVM(), dataVisual: DataVisuals())
     }
 }

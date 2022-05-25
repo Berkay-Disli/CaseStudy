@@ -10,14 +10,14 @@ import SwiftUI
 struct TabBarNavigator: View {
     @State private var selectedPage: Navigation = .homeView
     @StateObject var sideMenuNav = NavigationVM()
-    
+    @StateObject var dataVisual = DataVisuals()
     
     var body: some View {
         ZStack(alignment: .bottom) {
             // Navigate through pages
             switch selectedPage {
             case .homeView:
-                ListingPage(sideMenuNav: sideMenuNav)
+                ListingPage(sideMenuNav: sideMenuNav, dataVisual: dataVisual)
                     .transition(AnyTransition.opacity.animation(.easeInOut))
             case .newPost:
                 VStack {
@@ -76,7 +76,7 @@ struct TabBarNavigator: View {
                     }
                 }
             
-            SideMenu(sideMenuNav: sideMenuNav)
+            SideMenu(sideMenuNav: sideMenuNav, dataVisual: dataVisual)
                 .offset(x: sideMenuNav.sideMenuStatus == .menuClosed ? -323:-107, y: 0)
         }
         .edgesIgnoringSafeArea(.bottom)

@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct CoverImageComp: View {
+    @ObservedObject var dataVisual: DataVisuals
     let imageUrl: String
     
     var body: some View {
@@ -38,13 +39,13 @@ struct CoverImageComp: View {
                     .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 0)
             }
         }
-        .frame(width: UIScreen.main.bounds.width * 0.425, height: UIScreen.main.bounds.height * 0.35)
+        .frame(width: !dataVisual.showSingleItems ? UIScreen.main.bounds.width * 0.425:UIScreen.main.bounds.width * 0.8, height: !dataVisual.showSingleItems ? UIScreen.main.bounds.height * 0.35 : UIScreen.main.bounds.height * 0.65)
         .cornerRadius(20)
     }
 }
 
 struct CoverImageComp_Previews: PreviewProvider {
     static var previews: some View {
-        CoverImageComp(imageUrl: "")
+        CoverImageComp(dataVisual: DataVisuals(), imageUrl: "")
     }
 }
