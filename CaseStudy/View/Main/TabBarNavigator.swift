@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TabBarNavigator: View {
     @State private var selectedPage: Navigation = .homeView
+    @State private var showSideMenu: SideMenuNav = .menuClosed
+    
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -59,10 +61,12 @@ struct TabBarNavigator: View {
             .foregroundColor(.black)
             .padding(.horizontal, 50)
             .frame(width: UIScreen.main.bounds.width, height: 100)
-            // Did not use materials since the guide screenshots looked like white color w/ opacity
+            // Did not use materials since the guide screenshot looked like white color w/ opacity
             .background(.white.opacity(0.7))
             .cornerRadius(50)
             
+            
+    
         }
         .edgesIgnoringSafeArea(.bottom)
     }

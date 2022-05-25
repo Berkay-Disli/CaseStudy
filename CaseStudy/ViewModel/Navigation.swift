@@ -22,3 +22,16 @@ enum Navigation: Int, CaseIterable {
         }
     }
 }
+
+enum SideMenuNav {
+    case menuOpen, menuClosed
+    
+    var state: Bool {
+        switch self {
+        case .menuOpen:
+            return true
+        case .menuClosed:
+            return false
+        }
+    }
+}

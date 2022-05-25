@@ -10,75 +10,89 @@ import SwiftUI
 struct ListingPage: View {
     @StateObject var dataVM = DataViewModel()
     @State private var selectedCategory = "Birthday"
+    @State private var showSideMenu: SideMenuNav = .menuClosed
+    
     let columns: [GridItem] = [GridItem(.flexible(), spacing: -20, alignment: .center),
                                GridItem(.flexible(), spacing: -20, alignment: .center)]
     
     
     var body: some View {
-        VStack {
-            // Header
-            VStack(spacing: 15) {
-                // -- Side Menu and Pro Button
-                HStack {
-                    Image(systemName: "line.3.horizontal").font(.title)
-                    Spacer()
-                    Button { } label: {
-                        HStack(spacing: 2) {
-                            Image(systemName: "suit.diamond")
-                            Text("Pro").bold()
-                        }
-                        .foregroundColor(.white)
-                        .frame(width: 75, height: 30)
-                        .background(LinearGradient(colors: [.purple, .pink], startPoint: .top, endPoint: .bottom))
-                        .cornerRadius(50)
-                    }
-                }
-                .padding(.horizontal)
+        ZStack(alignment: .leading) {
                 
-                // -- Categories
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack {
-                        ForEach(dataVM.categories, id: \.self) { category in
-                            VStack {
-                                Text(category)
-                                    .fontWeight(selectedCategory == category ? .bold:.regular)
-                                    .foregroundColor(selectedCategory == category ? .black: .gray)
-                                    .padding(.horizontal, 8)
-                                    .animation(.none, value: selectedCategory)
-                                    .onTapGesture {
-                                        withAnimation(.easeInOut) {
-                                            selectedCategory = category
-                                            dataVM.showDesiredCategoryTemplates(category: category)
+            VStack {
+                // Header
+                VStack(spacing: 15) {
+                    // -- Side Menu and Pro Button
+                    HStack {
+                        Image(systemName: "line.3.horizontal").font(.title)
+                            .onTapGesture {
+                                withAnimation(.easeInOut) {
+                                    showSideMenu = .menuOpen
+                                }
+                            }
+                        Spacer()
+                        Button { } label: {
+                            HStack(spacing: 2) {
+                                Image(systemName: "suit.diamond")
+                                Text("Pro").bold()
+                            }
+                            .foregroundColor(.white)
+                            .frame(width: 75, height: 30)
+                            .background(LinearGradient(colors: [.purple, .pink], startPoint: .top, endPoint: .bottom))
+                            .cornerRadius(50)
+                        }
+                    }
+                    .padding(.horizontal).padding(.bottom, 5)
+                    
+                    // -- Categories
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack {
+                            ForEach(dataVM.categories, id: \.self) { category in
+                                VStack(spacing: 8) {
+                                    Text(category)
+                                        .fontWeight(selectedCategory == category ? .bold:.regular)
+                                        .foregroundColor(selectedCategory == category ? .black: .gray)
+                                        .padding(.horizontal, 8)
+                                        .animation(.none, value: selectedCategory)
+                                        .onTapGesture {
+                                            withAnimation(.easeInOut) {
+                                                selectedCategory = category
+                                                dataVM.showDesiredCategoryTemplates(category: category)
+                                            }
                                         }
-                                    }
-                                Capsule().fill(selectedCategory == category ? .black:.clear)
-                                    .frame(height: 1)
+                                    Capsule().fill(selectedCategory == category ? .black:.clear)
+                                        .frame(height: 1)
+                                }
+                                .padding(.bottom, 20)
                             }
                         }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
+                    .frame(width: UIScreen.main.bounds.width, height: 40)
+                    
+                    
                 }
-                .frame(width: UIScreen.main.bounds.width, height: 40)
                 
-                
-            }
-            
-            // Templates Showcase
-            ScrollView {
-                if !dataVM.templatesByCategory.isEmpty {
-                    LazyVGrid(columns: columns) {
-                        ForEach(dataVM.templatesByCategory, id: \.self) { template in
-                            CoverImageComp(imageUrl: template.templateCoverImageUrlString)
-                                .padding([.bottom], 10)
+                // Templates Showcase
+                ScrollView {
+                    if !dataVM.templatesByCategory.isEmpty {
+                        LazyVGrid(columns: columns) {
+                            ForEach(dataVM.templatesByCategory, id: \.self) { template in
+                                CoverImageComp(imageUrl: template.templateCoverImageUrlString)
+                                    .padding([.bottom], 10)
+                            }
                         }
+                        .transition(AnyTransition.opacity.animation(.easeInOut))
+                    } else {
+                        ProgressView()
                     }
-                    .transition(AnyTransition.opacity.animation(.easeInOut))
-                } else {
-                    ProgressView()
                 }
+                 
             }
             
-            
+            SideMenu(showSideMenu: $showSideMenu)
+                .offset(x: showSideMenu == .menuClosed ? -215:0, y: 0)
+           
         }
     }
 }
