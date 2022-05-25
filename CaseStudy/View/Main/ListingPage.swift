@@ -23,6 +23,8 @@ struct ListingPage: View {
                 
                 NavigationLink(destination: Text("subsc"), isActive: $sideMenuNav.subscriptionPage) { }
                 
+                NavigationLink(destination: DetailsPage(dataVM: dataVM), isActive: $sideMenuNav.detailsPage) { }
+                
                 VStack {
                     // Header
                     VStack(spacing: 15) {
@@ -86,6 +88,11 @@ struct ListingPage: View {
                                     ForEach(dataVM.templatesByCategory, id: \.self) { template in
                                         CoverImageComp(dataVisual: dataVisual, imageUrl: template.templateCoverImageUrlString)
                                             .padding([.bottom], 10)
+                                            .onTapGesture {
+                                                dataVM.showDetails(template: template)
+                                                sideMenuNav.openDetailsPage()
+                                            }
+
                                     }
                                 }
                                 .transition(AnyTransition.opacity.animation(.easeInOut))

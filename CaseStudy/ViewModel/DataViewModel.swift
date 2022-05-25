@@ -11,7 +11,7 @@ class DataViewModel: ObservableObject {
     @Published var templates = [Template]()
     @Published var categories = [String]()
     @Published var templatesByCategory = [Template]()
-    
+    @Published var detailImages = [CanvasImages]()
     
     private var categoriesSet = Set<String>()
     
@@ -54,6 +54,16 @@ class DataViewModel: ObservableObject {
     
     func showDesiredCategoryTemplates(category: String) {
         templatesByCategory = templates.filter({($0.section.localizedCaseInsensitiveContains(category))})
+    }
+    
+    func showDetails(template: Template) {
+        detailImages.removeAll(keepingCapacity: false)
+        
+        detailImages.append(CanvasImages(frame1080x1920Model: FrameModel(width: 0, height: 0, x: 0, y: 0), defaultImageString: template.templateCoverImageUrlString))
+        
+        for image in template.canvasImages {
+            detailImages.append(image)
+        }
     }
     
 }
