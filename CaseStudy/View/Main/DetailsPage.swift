@@ -29,10 +29,22 @@ struct DetailsPage: View {
                     
                 Spacer()
                 
-                Text(dataVM.detailedTemplate.isFree ? "Free":"Subscribe")
-                    .bold()
-                    .foregroundColor(.pink)
-                    .transition(AnyTransition.scale.animation(.easeInOut))
+                if !dataVM.detailedTemplate.isFree {
+                    NavigationLink {
+                        SubscriptionPage()
+                    } label: {
+                        Text("Subscribe")
+                            .bold()
+                            .foregroundColor(.pink)
+                            .transition(AnyTransition.scale.animation(.easeInOut))
+                    }
+
+                } else {
+                    Text("Free")
+                        .bold()
+                        .foregroundColor(.pink)
+                        .transition(AnyTransition.scale.animation(.easeInOut))
+                }
                     
             }
             .padding(.horizontal)
