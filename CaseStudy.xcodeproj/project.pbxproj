@@ -13,6 +13,7 @@
 		23A6702C283E6BFD009B9951 /* TabBarNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6702B283E6BFD009B9951 /* TabBarNavigator.swift */; };
 		23A6702E283E6F5F009B9951 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6702D283E6F5F009B9951 /* Navigation.swift */; };
 		23A67030283E7406009B9951 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A6702F283E7406009B9951 /* SideMenu.swift */; };
+		23A67032283E8A72009B9951 /* SubscriptionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A67031283E8A72009B9951 /* SubscriptionPage.swift */; };
 		23EA50D7283E49E1008DC259 /* CaseStudyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EA50D6283E49E1008DC259 /* CaseStudyApp.swift */; };
 		23EA50D9283E49E1008DC259 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EA50D8283E49E1008DC259 /* ContentView.swift */; };
 		23EA50DB283E49E3008DC259 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23EA50DA283E49E3008DC259 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 		23A6702B283E6BFD009B9951 /* TabBarNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarNavigator.swift; sourceTree = "<group>"; };
 		23A6702D283E6F5F009B9951 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		23A6702F283E7406009B9951 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		23A67031283E8A72009B9951 /* SubscriptionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPage.swift; sourceTree = "<group>"; };
 		23EA50D3283E49E1008DC259 /* CaseStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaseStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23EA50D6283E49E1008DC259 /* CaseStudyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseStudyApp.swift; sourceTree = "<group>"; };
 		23EA50D8283E49E1008DC259 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,9 +121,10 @@
 		23EA50E7283E4A2C008DC259 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				23A6702B283E6BFD009B9951 /* TabBarNavigator.swift */,
 				23EA50ED283E4D6F008DC259 /* ListingPage.swift */,
 				23A67029283E6BDF009B9951 /* DetailsPage.swift */,
-				23A6702B283E6BFD009B9951 /* TabBarNavigator.swift */,
+				23A67031283E8A72009B9951 /* SubscriptionPage.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				23EA50EC283E4C1D008DC259 /* DataViewModel.swift in Sources */,
 				23EA50EA283E4A71008DC259 /* Template.swift in Sources */,
 				23EA50D9283E49E1008DC259 /* ContentView.swift in Sources */,
+				23A67032283E8A72009B9951 /* SubscriptionPage.swift in Sources */,
 				23A6702A283E6BDF009B9951 /* DetailsPage.swift in Sources */,
 				238799A7283E5AF00075FFF0 /* CoverImageComp.swift in Sources */,
 				23A67030283E7406009B9951 /* SideMenu.swift in Sources */,

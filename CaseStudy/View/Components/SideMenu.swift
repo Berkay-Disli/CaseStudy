@@ -33,13 +33,31 @@ struct SideMenu: View {
                     Text("Display Options")
                         .foregroundColor(.gray)
                     Picker(selection: $dataVisual.showSingleItems, label: Text("Picker")) {
-                        Image(systemName: "house").tag(false)
-                        Image(systemName: "heart").tag(true)
+                        Image(systemName: "square.grid.2x2").tag(false)
+                        Image(systemName: "1.circle").tag(true)
                     }
                     .pickerStyle(.segmented)
                     
                     Text(dataVisual.showSingleItems ? "Single":"Grid")
                         .foregroundColor(.pink)
+                    
+                    
+                    HStack {
+                        Spacer()
+                        Text("Subscribe")
+                            .font(.title3).bold()
+                            
+                            .frame(width: 150, height: 50)
+                            .foregroundColor(.pink)
+                            .overlay(Rectangle().stroke(LinearGradient(colors: [.purple, .pink], startPoint: .top, endPoint: .bottom), lineWidth: 2))
+                            .padding(.top)
+                            .onTapGesture {
+                                sideMenuNav.openSubsPage()
+                                sideMenuNav.closeMenu()
+                            }
+                        Spacer()
+                    }
+
                     
                 }
                 .padding(.horizontal)

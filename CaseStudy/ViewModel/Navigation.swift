@@ -10,6 +10,7 @@ import Foundation
 
 class NavigationVM: ObservableObject {
     @Published var sideMenuStatus: SideMenuNav = .menuClosed
+    @Published var subscriptionPage = false
     
     func openMenu() {
         sideMenuStatus = .menuOpen
@@ -17,6 +18,14 @@ class NavigationVM: ObservableObject {
     
     func closeMenu() {
         sideMenuStatus = .menuClosed
+    }
+    
+    func openSubsPage() {
+        subscriptionPage = true
+    }
+    
+    func closeSubsPage() {
+        subscriptionPage = false
     }
 }
 

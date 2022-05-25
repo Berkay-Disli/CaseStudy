@@ -80,6 +80,7 @@ struct TabBarNavigator: View {
                 .offset(x: sideMenuNav.sideMenuStatus == .menuClosed ? -323:-107, y: 0)
         }
         .edgesIgnoringSafeArea(.bottom)
+        
     }
 }
 
