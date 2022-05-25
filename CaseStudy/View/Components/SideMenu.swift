@@ -23,7 +23,9 @@ struct SideMenu: View {
                     .onTapGesture {
                         withAnimation(.easeInOut) {
                             sideMenuNav.closeMenu()
+                            sideMenuNav.showTabBar()
                         }
+                        
                     }
             }
             .padding(.top, 40)

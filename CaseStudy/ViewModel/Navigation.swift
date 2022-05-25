@@ -6,13 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 class NavigationVM: ObservableObject {
     @Published var sideMenuStatus: SideMenuNav = .menuClosed
     @Published var subscriptionPage = false
     @Published var detailsPage = false
+    @Published var mainTabSelection: Navigation = .homeView
+    @Published var tabBarHidden = false
     
+    // SideMenu
     func openMenu() {
         sideMenuStatus = .menuOpen
     }
@@ -21,6 +25,7 @@ class NavigationVM: ObservableObject {
         sideMenuStatus = .menuClosed
     }
     
+    // Subscription
     func openSubsPage() {
         subscriptionPage = true
     }
@@ -29,6 +34,7 @@ class NavigationVM: ObservableObject {
         subscriptionPage = false
     }
     
+    // DetailsPage
     func openDetailsPage() {
         detailsPage = true
     }
@@ -36,6 +42,32 @@ class NavigationVM: ObservableObject {
     func closeDetailsPage() {
         detailsPage = false
     }
+    
+    // TabNavigation
+    func setHome() {
+        mainTabSelection = .homeView
+    }
+    
+    func setNewPost() {
+        mainTabSelection = .newPost
+    }
+    
+    func setLiked() {
+        mainTabSelection = .liked
+    }
+    
+    func hideTabBar() {
+        withAnimation(.easeInOut) {
+            tabBarHidden = true
+        }
+    }
+    
+    func showTabBar() {
+        withAnimation(.easeInOut) {
+            tabBarHidden = false
+        }
+    }
+    
 }
 
 

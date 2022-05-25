@@ -13,6 +13,9 @@ class DataViewModel: ObservableObject {
     @Published var templatesByCategory = [Template]()
     @Published var detailImages = [CanvasImages]()
     
+    // default template
+    @Published var detailedTemplate = Template(templateCoverImageUrlString: "", section: "", isFree: true, canvasImages: [CanvasImages(frame1080x1920Model: FrameModel(width: 0, height: 0, x: 0, y: 0), defaultImageString: "")])
+    
     private var categoriesSet = Set<String>()
     
     init() {
@@ -64,6 +67,10 @@ class DataViewModel: ObservableObject {
         for image in template.canvasImages {
             detailImages.append(image)
         }
+        
+        detailedTemplate = template
     }
+    
+
     
 }

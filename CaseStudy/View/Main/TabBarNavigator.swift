@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct TabBarNavigator: View {
-    @State private var selectedPage: Navigation = .homeView
-    @StateObject var sideMenuNav = NavigationVM()
+    
+    @StateObject var navigationController = NavigationVM()
     @StateObject var dataVisual = DataVisuals()
     
     var body: some View {
         ZStack(alignment: .bottom) {
             // Navigate through pages
-            switch selectedPage {
+            switch navigationController.mainTabSelection {
             case .homeView:
-                ListingPage(sideMenuNav: sideMenuNav, dataVisual: dataVisual)
+                ListingPage(sideMenuNav: navigationController, dataVisual: dataVisual)
                     .transition(AnyTransition.opacity.animation(.easeInOut))
             case .newPost:
                 VStack {
@@ -36,48 +36,51 @@ struct TabBarNavigator: View {
             }
             
             // page selection
-            VStack {
-                HStack {
-                    Image(systemName: selectedPage == .homeView ? "house.fill":"house")
-                        .foregroundColor(selectedPage == .homeView ? .black:.gray)
-                        .onTapGesture {
-                            selectedPage = .homeView
-                        }
-                    Spacer()
-                    Image(systemName: selectedPage == .newPost ? "square.grid.2x2.fill":"square.grid.2x2")
-                        .foregroundColor(selectedPage == .newPost ? .black:.gray)
-                        .onTapGesture {
-                            selectedPage = .newPost
-                        }
-                    Spacer()
-                    Image(systemName: selectedPage == .liked ? "heart.fill":"heart")
-                        .foregroundColor(selectedPage == .liked ? .black:.gray)
-                        .onTapGesture {
-                            selectedPage = .liked
-                        }
-                }.padding(.bottom)
+            if !navigationController.tabBarHidden {
+                VStack {
+                    HStack {
+                        Image(systemName: navigationController.mainTabSelection == .homeView ? "house.fill":"house")
+                            .foregroundColor(navigationController.mainTabSelection == .homeView ? .black:.gray)
+                            .onTapGesture {
+                                navigationController.setHome()
+                            }
+                        Spacer()
+                        Image(systemName: navigationController.mainTabSelection == .newPost ? "square.grid.2x2.fill":"square.grid.2x2")
+                            .foregroundColor(navigationController.mainTabSelection == .newPost ? .black:.gray)
+                            .onTapGesture {
+                                navigationController.setNewPost()
+                            }
+                        Spacer()
+                        Image(systemName: navigationController.mainTabSelection == .liked ? "heart.fill":"heart")
+                            .foregroundColor(navigationController.mainTabSelection == .liked ? .black:.gray)
+                            .onTapGesture {
+                                navigationController.setLiked()
+                            }
+                    }.padding(.bottom)
+                }
+                .font(.system(size: 30))
+                .foregroundColor(.black)
+                .padding(.horizontal, 50)
+                .frame(width: UIScreen.main.bounds.width, height: 100)
+                // Did not use materials since the guide screenshot looked like white color w/ opacity
+                .background(.white.opacity(0.7))
+                .cornerRadius(50)
+                .transition(AnyTransition.scale.animation(.easeInOut))
             }
-            .font(.system(size: 30))
-            .foregroundColor(.black)
-            .padding(.horizontal, 50)
-            .frame(width: UIScreen.main.bounds.width, height: 100)
-            // Did not use materials since the guide screenshot looked like white color w/ opacity
-            .background(.white.opacity(0.7))
-            .cornerRadius(50)
             
-            
-            Rectangle().fill(.black.opacity(sideMenuNav.sideMenuStatus == .menuOpen ? 0.2:0))
+            Rectangle().fill(.black.opacity(navigationController.sideMenuStatus == .menuOpen ? 0.2:0))
                 .ignoresSafeArea()
                 .onTapGesture {
-                    if sideMenuNav.sideMenuStatus == .menuOpen {
+                    if navigationController.sideMenuStatus == .menuOpen {
                         withAnimation(.easeInOut) {
-                            sideMenuNav.closeMenu()
+                            navigationController.closeMenu()
+                            navigationController.showTabBar()
                         }
                     }
                 }
             
-            SideMenu(sideMenuNav: sideMenuNav, dataVisual: dataVisual)
-                .offset(x: sideMenuNav.sideMenuStatus == .menuClosed ? -323:-107, y: 0)
+            SideMenu(sideMenuNav: navigationController, dataVisual: dataVisual)
+                .offset(x: navigationController.sideMenuStatus == .menuClosed ? -323:-107, y: 0)
         }
         .edgesIgnoringSafeArea(.bottom)
         

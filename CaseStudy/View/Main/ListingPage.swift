@@ -23,7 +23,7 @@ struct ListingPage: View {
                 
                 NavigationLink(destination: Text("subsc"), isActive: $sideMenuNav.subscriptionPage) { }
                 
-                NavigationLink(destination: DetailsPage(dataVM: dataVM), isActive: $sideMenuNav.detailsPage) { }
+                NavigationLink(destination: DetailsPage(dataVM: dataVM, navigationController: sideMenuNav), isActive: $sideMenuNav.detailsPage) { }
                 
                 VStack {
                     // Header
@@ -34,6 +34,7 @@ struct ListingPage: View {
                                 .onTapGesture {
                                     withAnimation(.easeInOut) {
                                         sideMenuNav.openMenu()
+                                        sideMenuNav.hideTabBar()
                                     }
                                 }
                             Spacer()
@@ -90,7 +91,9 @@ struct ListingPage: View {
                                             .padding([.bottom], 10)
                                             .onTapGesture {
                                                 dataVM.showDetails(template: template)
+                                                sideMenuNav.hideTabBar()
                                                 sideMenuNav.openDetailsPage()
+                                                
                                             }
 
                                     }
