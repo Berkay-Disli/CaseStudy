@@ -15,6 +15,7 @@ class NavigationVM: ObservableObject {
     @Published var detailsPage = false
     @Published var mainTabSelection: Navigation = .homeView
     @Published var tabBarHidden = false
+    @Published var showBottomPopup = false
     
     // SideMenu
     func openMenu() {
@@ -67,6 +68,14 @@ class NavigationVM: ObservableObject {
             tabBarHidden = false
         }
     }
+    
+    // Details Page Bottom Popup
+    func changePopupMenu() {
+        withAnimation(.easeInOut) {
+            showBottomPopup.toggle()
+        }
+    }
+    
     
 }
 

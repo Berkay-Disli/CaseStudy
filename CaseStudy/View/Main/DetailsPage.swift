@@ -51,9 +51,13 @@ struct DetailsPage: View {
             VStack {
                 VStack(spacing: 4) {
                     Text("Image Details")
-                    Image(systemName: "chevron.up")
+                    Image(systemName: navigationController.showBottomPopup ? "chevron.down":"chevron.up")
                 }
                 .foregroundColor(.gray)
+                .padding(.bottom, navigationController.showBottomPopup ? 0 : 14)
+                .onTapGesture {
+                    navigationController.changePopupMenu()
+                }
                 
                 HStack(alignment: .top, spacing: 50) {
                     VStack(alignment: .leading) {
@@ -92,6 +96,7 @@ struct DetailsPage: View {
                 .padding(.top, 10)
             
             }
+            .offset(x: 0, y: !navigationController.showBottomPopup ? 90:0)
             
             
             
