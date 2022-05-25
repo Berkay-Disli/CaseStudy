@@ -14,6 +14,7 @@ struct DetailsPage: View {
     @ObservedObject var dataVM: DataViewModel
     @ObservedObject var navigationController: NavigationVM
     @Environment(\.dismiss) var dismiss
+    @State private var index = 0
     
     var items = Array(0..<10)
     var body: some View {
@@ -40,12 +41,66 @@ struct DetailsPage: View {
             Pager(page: page, data: dataVM.detailImages, id: \.self) { model in
                 ImageComp(imgUrl: model.defaultImageString)
             }
+            .onPageChanged({ index in
+                self.index = index
+                print(dataVM.detailedTemplate.canvasImages)
+            })
             .loopPages()
+            
+            
+            VStack {
+                VStack(spacing: 4) {
+                    Text("Image Details")
+                    Image(systemName: "chevron.up")
+                }
+                .foregroundColor(.gray)
+                
+                HStack(alignment: .top, spacing: 50) {
+                    VStack(alignment: .leading) {
+                        if index != 0 {
+                            HStack {
+                                Text("Image Width:").bold()
+                                Spacer()
+                                Text("\(dataVM.detailImages[index].frame1080x1920Model.width)").bold()
+                                    .foregroundColor(.pink)
+                            }
+                            .transition(AnyTransition.opacity.animation(.easeInOut))
+                            HStack {
+                                Text("Image Height:").bold()
+                                Spacer()
+                                Text("\(dataVM.detailImages[index].frame1080x1920Model.height)").bold()
+                                    .foregroundColor(.pink)
+                            }
+                            .transition(AnyTransition.opacity.animation(.easeInOut))
+                        }
+                    }
+                    .frame(width: 170)
+                    
+                    
+                    
+                    VStack(alignment: .leading) {
+                        Text("Section")
+                            .foregroundColor(.gray)
+                        Text(dataVM.detailedTemplate.section.uppercased())
+                            .font(.title).bold()
+                        .foregroundColor(.pink)
+                    }
+                    .padding(.bottom)
+                }
+                .frame(width: UIScreen.main.bounds.width, height: 90)
+                .background(.ultraThinMaterial)
+                .padding(.top, 10)
+            
+            }
+            
+            
+            
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             
             
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
