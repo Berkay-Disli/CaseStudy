@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabBarNavigator: View {
     @State private var selectedPage: Navigation = .homeView
-    @State private var showSideMenu: SideMenuNav = .menuClosed
+    @StateObject var sideMenuNav = NavigationVM()
     
     
     var body: some View {
@@ -17,7 +17,7 @@ struct TabBarNavigator: View {
             // Navigate through pages
             switch selectedPage {
             case .homeView:
-                ListingPage()
+                ListingPage(sideMenuNav: sideMenuNav)
                     .transition(AnyTransition.opacity.animation(.easeInOut))
             case .newPost:
                 VStack {
@@ -66,7 +66,18 @@ struct TabBarNavigator: View {
             .cornerRadius(50)
             
             
-    
+            Rectangle().fill(.black.opacity(sideMenuNav.sideMenuStatus == .menuOpen ? 0.2:0))
+                .ignoresSafeArea()
+                .onTapGesture {
+                    if sideMenuNav.sideMenuStatus == .menuOpen {
+                        withAnimation(.easeInOut) {
+                            sideMenuNav.closeMenu()
+                        }
+                    }
+                }
+            
+            SideMenu(sideMenuNav: sideMenuNav)
+                .offset(x: sideMenuNav.sideMenuStatus == .menuClosed ? -323:-107, y: 0)
         }
         .edgesIgnoringSafeArea(.bottom)
     }

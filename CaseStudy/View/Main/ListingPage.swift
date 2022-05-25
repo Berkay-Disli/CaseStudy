@@ -10,7 +10,7 @@ import SwiftUI
 struct ListingPage: View {
     @StateObject var dataVM = DataViewModel()
     @State private var selectedCategory = "Birthday"
-    @State private var showSideMenu: SideMenuNav = .menuClosed
+    @ObservedObject var sideMenuNav: NavigationVM
     
     let columns: [GridItem] = [GridItem(.flexible(), spacing: -20, alignment: .center),
                                GridItem(.flexible(), spacing: -20, alignment: .center)]
@@ -18,7 +18,6 @@ struct ListingPage: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-                
             VStack {
                 // Header
                 VStack(spacing: 15) {
@@ -27,7 +26,7 @@ struct ListingPage: View {
                         Image(systemName: "line.3.horizontal").font(.title)
                             .onTapGesture {
                                 withAnimation(.easeInOut) {
-                                    showSideMenu = .menuOpen
+                                    sideMenuNav.openMenu()
                                 }
                             }
                         Spacer()
@@ -43,6 +42,7 @@ struct ListingPage: View {
                         }
                     }
                     .padding(.horizontal).padding(.bottom, 5)
+                    .padding(.top, 42)
                     
                     // -- Categories
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -89,16 +89,12 @@ struct ListingPage: View {
                 }
                  
             }
-            
-            SideMenu(showSideMenu: $showSideMenu)
-                .offset(x: showSideMenu == .menuClosed ? -215:0, y: 0)
-           
         }
     }
 }
 
 struct ListingPage_Previews: PreviewProvider {
     static var previews: some View {
-        ListingPage()
+        ListingPage(sideMenuNav: NavigationVM())
     }
 }
