@@ -8,28 +8,37 @@
 import SwiftUI
 
 struct SubscriptionPage: View {
+    // Subscription Case is set for default
     @State private var selection: Subscription = .monthly
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss     // Dismiss the page (function)
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.2).ignoresSafeArea()
+            Color.gray.opacity(0.2).ignoresSafeArea()   // Background color
             VStack {
+                // MainTitle
                 Text("Subscription")
                     .font(.title2).bold()
+                
+                // Main Image and view dismiss button
                 ZStack(alignment: .leading) {
                     Image("girl")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: UIScreen.main.bounds.width, height: 321)
+                    // Half the image is slightly darker. (for Before-After look)
                     Color.black
                         .frame(width: UIScreen.main.bounds.width * 0.5, height: 319)
                         .opacity(0.12)
                     
                     VStack {
                         HStack {
+                            // Dismiss the view
                             Image(systemName: "xmark")
                                 .font(.title2).foregroundColor(.white)
                                 .padding()
+                                .onTapGesture {
+                                    dismiss()
+                                }
                             Spacer()
                         }
                         Spacer()
@@ -67,6 +76,7 @@ struct SubscriptionPage: View {
                 .padding(.top, 30)
                 
                 HStack {
+                    // Iterate through all cases of subscription types
                     ForEach(Subscription.allCases, id: \.self) { item in
                         VStack(spacing: 2) {
                             Text(item.title)

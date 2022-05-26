@@ -29,6 +29,7 @@ struct DetailsPage: View {
                     
                 Spacer()
                 
+                // If template is not free, Subscription NavLink appears
                 if !dataVM.detailedTemplate.isFree {
                     NavigationLink {
                         SubscriptionPage()
@@ -38,18 +39,17 @@ struct DetailsPage: View {
                             .foregroundColor(.pink)
                             .transition(AnyTransition.scale.animation(.easeInOut))
                     }
-
                 } else {
                     Text("Free")
                         .bold()
                         .foregroundColor(.pink)
                         .transition(AnyTransition.scale.animation(.easeInOut))
                 }
-                    
             }
             .padding(.horizontal)
             .frame(width: UIScreen.main.bounds.width, height: 70)
             
+            // Infinite looping imageshow careousel SwiftUIPager package is used to 'loop'.
             Pager(page: page, data: dataVM.detailImages, id: \.self) { model in
                 ImageComp(imgUrl: model.defaultImageString)
             }
@@ -59,8 +59,9 @@ struct DetailsPage: View {
             })
             .loopPages()
             
-            
+            // Small Popup of image frame and section details
             VStack {
+                // When tappe, it slides up to show popup
                 VStack(spacing: 4) {
                     Text("Image Details")
                     Image(systemName: navigationController.showBottomPopup ? "chevron.down":"chevron.up")
@@ -73,6 +74,7 @@ struct DetailsPage: View {
                 
                 HStack(alignment: .top, spacing: 50) {
                     VStack(alignment: .leading) {
+                        // if index = 0, cover image is shown. Therefore no info will be shown at index 0
                         if index != 0 {
                             HStack {
                                 Text("Image Width:").bold()
@@ -109,7 +111,7 @@ struct DetailsPage: View {
             
             }
             .offset(x: 0, y: !navigationController.showBottomPopup ? 90:0)
-            
+            // Line above: Offset will be animated to smoothly move up and down
             
             
             .navigationBarHidden(true)

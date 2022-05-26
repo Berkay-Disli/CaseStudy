@@ -9,20 +9,21 @@ import SwiftUI
 
 struct ListingPage: View {
     @StateObject var dataVM = DataViewModel()
+    // Select categories
     @State private var selectedCategory = "Birthday"
     @ObservedObject var sideMenuNav: NavigationVM
     @ObservedObject var dataVisual: DataVisuals
     
+    // Grid
     let columns: [GridItem] = [GridItem(.flexible(), spacing: -20, alignment: .center),
                                GridItem(.flexible(), spacing: -20, alignment: .center)]
-    
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .leading) {
                 
-                NavigationLink(destination: Text("subsc"), isActive: $sideMenuNav.subscriptionPage) { }
-                
+                // Hidden navigationlinks with no label
+                NavigationLink(destination: SubscriptionPage(), isActive: $sideMenuNav.subscriptionPage) { }
                 NavigationLink(destination: DetailsPage(dataVM: dataVM, navigationController: sideMenuNav), isActive: $sideMenuNav.detailsPage) { }
                 
                 VStack {
@@ -83,7 +84,9 @@ struct ListingPage: View {
                     
                     // Templates Showcase
                     ScrollView {
+                        // If no template is available, progress view will show
                         if !dataVM.templatesByCategory.isEmpty {
+                            // Either a GridLayout
                             if !dataVisual.showSingleItems {
                                 LazyVGrid(columns: columns) {
                                     ForEach(dataVM.templatesByCategory, id: \.self) { template in
@@ -99,11 +102,17 @@ struct ListingPage: View {
                                     }
                                 }
                                 .transition(AnyTransition.opacity.animation(.easeInOut))
-                            } else {
+                            } else {    // Or single layout
                                 LazyVStack {
                                     ForEach(dataVM.templatesByCategory, id: \.self) { template in
                                         CoverImageComp(dataVisual: dataVisual, imageUrl: template.templateCoverImageUrlString)
                                             .padding([.bottom], 10)
+                                            .onTapGesture {
+                                                dataVM.showDetails(template: template)
+                                                sideMenuNav.hideTabBar()
+                                                sideMenuNav.openDetailsPage()
+                                                
+                                            }
                                     }
                                 }
                             }

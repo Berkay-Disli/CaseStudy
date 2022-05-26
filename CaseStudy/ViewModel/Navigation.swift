@@ -10,11 +10,17 @@ import SwiftUI
 
 
 class NavigationVM: ObservableObject {
+    // Side Menu State
     @Published var sideMenuStatus: SideMenuNav = .menuClosed
+    // Subscription Page State
     @Published var subscriptionPage = false
+    // Details Page State
     @Published var detailsPage = false
+    // Main Tab page selection
     @Published var mainTabSelection: Navigation = .homeView
+    // To hide tabBar if neccesary
     @Published var tabBarHidden = false
+    // Image frame size info popup
     @Published var showBottomPopup = false
     
     // SideMenu
@@ -84,7 +90,7 @@ class NavigationVM: ObservableObject {
 enum Navigation: Int, CaseIterable {
     case homeView, newPost, liked
     
-    
+    // There are 3 tabBar pages
     var selectedPage: Int {
         switch self {
         case .homeView:
@@ -110,6 +116,8 @@ enum SideMenuNav {
     }
 }
 
+// This is for toggling between 2x2 grid or single item for page @ListingPage
+// Toggle can be changed @SideMenu
 class DataVisuals: ObservableObject {
     @Published var showSingleItems = false
     

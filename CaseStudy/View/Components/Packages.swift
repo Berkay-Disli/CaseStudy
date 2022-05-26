@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Packages: View {
+    // @subscriptionpage, it shows 3 different packages with PriceTag and TimeTitle
     let title: String
     let price: String
     var body: some View {

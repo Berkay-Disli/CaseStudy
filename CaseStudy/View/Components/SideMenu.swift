@@ -10,6 +10,7 @@ import SwiftUI
 struct SideMenu: View {
     @ObservedObject var sideMenuNav: NavigationVM
     @ObservedObject var dataVisual: DataVisuals
+    // Grid-Single Toggle Selection
     @State private var pickerSelection = 0
     
     var body: some View {
@@ -25,7 +26,6 @@ struct SideMenu: View {
                             sideMenuNav.closeMenu()
                             sideMenuNav.showTabBar()
                         }
-                        
                     }
             }
             .padding(.top, 40)
@@ -40,37 +40,33 @@ struct SideMenu: View {
                     }
                     .pickerStyle(.segmented)
                     
+                    // Tells the user which option is selected along with symbols
                     Text(dataVisual.showSingleItems ? "Single":"Grid")
                         .foregroundColor(.pink)
                     
                     
                     HStack {
                         Spacer()
+                        // Directs to SubscriptionPage but it is NOT a NavigationLink
+                        // Once clicked, it activates the switch to navigate FROM ListingPage instead of SideMenu. Therefore on return, user will return to ListingPage
                         Text("Subscribe")
                             .font(.title3).bold()
-                            
                             .frame(width: 150, height: 50)
                             .foregroundColor(.pink)
                             .overlay(Rectangle().stroke(LinearGradient(colors: [.purple, .pink], startPoint: .top, endPoint: .bottom), lineWidth: 2))
                             .padding(.top)
                             .onTapGesture {
+                                // Navigation switches activated
                                 sideMenuNav.openSubsPage()
                                 sideMenuNav.closeMenu()
                             }
                         Spacer()
                     }
-
-                    
                 }
                 .padding(.horizontal)
-                
-                
-                
                 Spacer()
             }
             .padding(.top, 40)
-            
-            
             
             Spacer()
             
@@ -80,8 +76,6 @@ struct SideMenu: View {
         }
         .frame(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height)
         .background(.white)
-        
-        //.shadow(color:.gray.opacity(0.4), radius: sideMenuNav.sideMenuStatus == .menuOpen ? 5:0, x: 5, y: 0)
         .edgesIgnoringSafeArea(.horizontal)
     }
 }

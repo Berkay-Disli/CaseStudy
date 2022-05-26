@@ -39,6 +39,7 @@ struct CoverImageComp: View {
                     .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 0)
             }
         }
+        // Frame changes according to listing style -> (2x2 Grid or Single per Page)
         .frame(width: !dataVisual.showSingleItems ? UIScreen.main.bounds.width * 0.425:UIScreen.main.bounds.width * 0.8, height: !dataVisual.showSingleItems ? UIScreen.main.bounds.height * 0.35 : UIScreen.main.bounds.height * 0.65)
         .cornerRadius(20)
     }

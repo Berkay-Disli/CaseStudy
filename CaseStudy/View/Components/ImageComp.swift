@@ -9,10 +9,12 @@ import SwiftUI
 import Kingfisher
 
 struct ImageComp: View {
+    // Takes the url of image as String
     let imgUrl: String
     
     var body: some View {
         VStack {
+            // PS: Kingfisher is used for asynchronous image downloading and caching.
             KFImage(URL(string: imgUrl))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
