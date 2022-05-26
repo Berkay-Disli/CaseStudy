@@ -123,6 +123,9 @@ struct ListingPage: View {
                      
                 }
             }
+            .onAppear(perform: {
+                sideMenuNav.showTabBar()
+            })
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
         }

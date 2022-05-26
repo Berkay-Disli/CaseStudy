@@ -90,6 +90,9 @@ struct TabBarNavigator: View {
                 .offset(x: navigationController.sideMenuStatus == .menuClosed ? -323:-107, y: 0)
                 
         }
+        .onAppear(perform: {
+            navigationController.showTabBar()
+        })
         .edgesIgnoringSafeArea(.bottom)
         
     }

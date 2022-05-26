@@ -87,7 +87,7 @@ struct SubscriptionPage: View {
                         .frame(width: 130, height: 100)
                         .background(selection == item ? .black:.white)
                         .cornerRadius(10)
-                        .onTapGesture {
+                        .onTapGesture {     // on tap, selection is changed
                             withAnimation(.easeInOut) {
                                 selection = item
                             }
@@ -96,7 +96,7 @@ struct SubscriptionPage: View {
                 }
                 .padding(.vertical, 20)
                 
-                Button(action: {}, label: {
+                Button(action: {}, label: {     // button with no function
                     Text("Start Now")
                         .font(.title2).bold()
                         .foregroundColor(.white)
