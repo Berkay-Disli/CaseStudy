@@ -83,7 +83,7 @@ struct ListingPage: View {
                     }
                     
                     // Templates Showcase
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         // If no template is available, progress view will show
                         if !dataVM.templatesByCategory.isEmpty {
                             // Either a GridLayout

@@ -8,6 +8,9 @@
 import Foundation
 
 struct Template: Hashable, Codable {
+    // PS: Some data from API is missing variables: templateCoverImageUrlString, section, isFree
+    // This issue started @26 May around 21:00
+    // I did not use optionals until then. However, until the json data is fixed, this is my solution.
     let templateCoverImageUrlString: String?
     let section: String?
     let isFree: Bool?

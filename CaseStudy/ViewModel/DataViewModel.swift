@@ -39,7 +39,9 @@ class DataViewModel: ObservableObject {
                 
                 // Published changes are on main thread since the code is inside a completion
                 DispatchQueue.main.async {
-                    self.templates = result.dropLast(3)
+                    // As stated, some data from the API is missing.
+                    // Line below makes sure that templates array has ZERO missing data inside of it
+                    self.templates = result.filter { $0.section != nil }
                     self.setCategories()
                     // setCategories func orderes categories alphabetically
                     // So the line below sets the default category selection to first index
