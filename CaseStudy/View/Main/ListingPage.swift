@@ -90,14 +90,16 @@ struct ListingPage: View {
                             if !dataVisual.showSingleItems {
                                 LazyVGrid(columns: columns) {
                                     ForEach(dataVM.templatesByCategory, id: \.self) { template in
-                                        CoverImageComp(dataVisual: dataVisual, imageUrl: template.templateCoverImageUrlString)
-                                            .padding([.bottom], 10)
-                                            .onTapGesture {
-                                                dataVM.showDetails(template: template)
-                                                navigationController.hideTabBar()
-                                                navigationController.openDetailsPage()
-                                                
-                                            }
+                                        if let imgUrl = template.templateCoverImageUrlString {
+                                            CoverImageComp(dataVisual: dataVisual, imageUrl: imgUrl)
+                                                .padding([.bottom], 10)
+                                                .onTapGesture {
+                                                    dataVM.showDetails(template: template)
+                                                    navigationController.hideTabBar()
+                                                    navigationController.openDetailsPage()
+                                                    
+                                                }
+                                        }
 
                                     }
                                 }
@@ -105,14 +107,16 @@ struct ListingPage: View {
                             } else {    // Or single layout
                                 LazyVStack {
                                     ForEach(dataVM.templatesByCategory, id: \.self) { template in
-                                        CoverImageComp(dataVisual: dataVisual, imageUrl: template.templateCoverImageUrlString)
-                                            .padding([.bottom], 10)
-                                            .onTapGesture {
-                                                dataVM.showDetails(template: template)
-                                                navigationController.hideTabBar()
-                                                navigationController.openDetailsPage()
-                                                
-                                            }
+                                        if let imgUrl = template.templateCoverImageUrlString {
+                                            CoverImageComp(dataVisual: dataVisual, imageUrl: imgUrl)
+                                                .padding([.bottom], 10)
+                                                .onTapGesture {
+                                                    dataVM.showDetails(template: template)
+                                                    navigationController.hideTabBar()
+                                                    navigationController.openDetailsPage()
+                                                    
+                                                }
+                                        }
                                     }
                                 }
                             }

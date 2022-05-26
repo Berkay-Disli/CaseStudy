@@ -30,7 +30,7 @@ struct DetailsPage: View {
                 Spacer()
                 
                 // If template is not free, Subscription NavLink appears
-                if !dataVM.detailedTemplate.isFree {
+                if !(dataVM.detailedTemplate.isFree ?? false) {
                     NavigationLink {
                         SubscriptionPage()
                     } label: {
@@ -99,9 +99,12 @@ struct DetailsPage: View {
                     VStack(alignment: .leading) {
                         Text("Section")
                             .foregroundColor(.gray)
-                        Text(dataVM.detailedTemplate.section.uppercased())
-                            .font(.title).bold()
-                        .foregroundColor(.pink)
+                        if let section = dataVM.detailedTemplate.section?.uppercased() {
+                            Text(section)
+                                .font(.title).bold()
+                                .foregroundColor(.pink)
+                        }
+                        
                     }
                     .padding(.bottom)
                 }

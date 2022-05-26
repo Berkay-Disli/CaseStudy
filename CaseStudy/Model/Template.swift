@@ -8,9 +8,9 @@
 import Foundation
 
 struct Template: Hashable, Codable {
-    let templateCoverImageUrlString: String
-    let section: String
-    let isFree: Bool
+    let templateCoverImageUrlString: String?
+    let section: String?
+    let isFree: Bool?
     let canvasImages: [CanvasImages]
 }
 

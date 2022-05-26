@@ -39,7 +39,7 @@ class DataViewModel: ObservableObject {
                 
                 // Published changes are on main thread since the code is inside a completion
                 DispatchQueue.main.async {
-                    self.templates = result
+                    self.templates = result.dropLast(3)
                     self.setCategories()
                     // setCategories func orderes categories alphabetically
                     // So the line below sets the default category selection to first index
@@ -55,7 +55,8 @@ class DataViewModel: ObservableObject {
     // Filter categories from the published templates array
     func setCategories() {
         for template in templates {
-            categoriesSet.insert(template.section)  // Unique collection, easily done
+            guard let section = template.section else { return }
+            categoriesSet.insert(section)  // Unique collection, easily done
         }
         // Set >> Array convertion. It's easier to use in 'ForEach' loop
         for category in categoriesSet {
@@ -66,7 +67,8 @@ class DataViewModel: ObservableObject {
     
     // Filter templates array by desired category
     func showDesiredCategoryTemplates(category: String) {
-        templatesByCategory = templates.filter({($0.section.localizedCaseInsensitiveContains(category))})
+        
+        templatesByCategory = templates.filter({($0.section?.localizedCaseInsensitiveContains(category) ?? true)})
     }
     
     // After the cover image is clicked at ListingPage, this function sets the template to show details
@@ -75,7 +77,8 @@ class DataViewModel: ObservableObject {
         detailImages.removeAll(keepingCapacity: false)
         
         // to upload 'templateCoverImageUrlString', it is wrapped inside a 'CanvasImages' model and appended to collection
-        detailImages.append(CanvasImages(frame1080x1920Model: FrameModel(width: 0, height: 0, x: 0, y: 0), defaultImageString: template.templateCoverImageUrlString))
+        guard let imgUrl = template.templateCoverImageUrlString else { return }
+        detailImages.append(CanvasImages(frame1080x1920Model: FrameModel(width: 0, height: 0, x: 0, y: 0), defaultImageString: imgUrl))
         // The rest of the images are already 'CanvasImages' model. So they are simply appended.
         for image in template.canvasImages {
             detailImages.append(image)
