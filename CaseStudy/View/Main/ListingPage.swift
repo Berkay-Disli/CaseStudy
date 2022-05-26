@@ -11,7 +11,7 @@ struct ListingPage: View {
     @StateObject var dataVM = DataViewModel()
     // Select categories
     @State private var selectedCategory = "Birthday"
-    @ObservedObject var sideMenuNav: NavigationVM
+    @ObservedObject var navigationController: NavigationVM
     @ObservedObject var dataVisual: DataVisuals
     
     // Grid
@@ -23,8 +23,8 @@ struct ListingPage: View {
             ZStack(alignment: .leading) {
                 
                 // Hidden navigationlinks with no label
-                NavigationLink(destination: SubscriptionPage(), isActive: $sideMenuNav.subscriptionPage) { }
-                NavigationLink(destination: DetailsPage(dataVM: dataVM, navigationController: sideMenuNav), isActive: $sideMenuNav.detailsPage) { }
+                NavigationLink(destination: SubscriptionPage(), isActive: $navigationController.subscriptionPage) { }
+                NavigationLink(destination: DetailsPage(dataVM: dataVM, navigationController: navigationController), isActive: $navigationController.detailsPage) { }
                 
                 VStack {
                     // Header
@@ -34,8 +34,8 @@ struct ListingPage: View {
                             Image(systemName: "line.3.horizontal").font(.title)
                                 .onTapGesture {
                                     withAnimation(.easeInOut) {
-                                        sideMenuNav.openMenu()
-                                        sideMenuNav.hideTabBar()
+                                        navigationController.openMenu()
+                                        navigationController.hideTabBar()
                                     }
                                 }
                             Spacer()
@@ -94,8 +94,8 @@ struct ListingPage: View {
                                             .padding([.bottom], 10)
                                             .onTapGesture {
                                                 dataVM.showDetails(template: template)
-                                                sideMenuNav.hideTabBar()
-                                                sideMenuNav.openDetailsPage()
+                                                navigationController.hideTabBar()
+                                                navigationController.openDetailsPage()
                                                 
                                             }
 
@@ -109,8 +109,8 @@ struct ListingPage: View {
                                             .padding([.bottom], 10)
                                             .onTapGesture {
                                                 dataVM.showDetails(template: template)
-                                                sideMenuNav.hideTabBar()
-                                                sideMenuNav.openDetailsPage()
+                                                navigationController.hideTabBar()
+                                                navigationController.openDetailsPage()
                                                 
                                             }
                                     }
@@ -124,7 +124,7 @@ struct ListingPage: View {
                 }
             }
             .onAppear(perform: {
-                sideMenuNav.showTabBar()
+                navigationController.showTabBar()
             })
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
@@ -134,6 +134,6 @@ struct ListingPage: View {
 
 struct ListingPage_Previews: PreviewProvider {
     static var previews: some View {
-        ListingPage(sideMenuNav: NavigationVM(), dataVisual: DataVisuals())
+        ListingPage(navigationController: NavigationVM(), dataVisual: DataVisuals())
     }
 }

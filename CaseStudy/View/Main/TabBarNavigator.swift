@@ -19,7 +19,7 @@ struct TabBarNavigator: View {
             // View changes according to switched variable below
             switch navigationController.mainTabSelection {  // switches between different cases of pages
             case .homeView:
-                ListingPage(sideMenuNav: navigationController, dataVisual: dataVisual)
+                ListingPage(navigationController: navigationController, dataVisual: dataVisual)
                     .transition(AnyTransition.opacity.animation(.easeInOut))
             case .newPost:  // No function - page name is irrelevant
                 VStack {
@@ -86,7 +86,7 @@ struct TabBarNavigator: View {
                 }
             
             // SideMenu is offsetted on x coordinate to show/hide itself
-            SideMenu(sideMenuNav: navigationController, dataVisual: dataVisual)
+            SideMenu(navigationController: navigationController, dataVisual: dataVisual)
                 .offset(x: navigationController.sideMenuStatus == .menuClosed ? -323:-107, y: 0)
                 
         }

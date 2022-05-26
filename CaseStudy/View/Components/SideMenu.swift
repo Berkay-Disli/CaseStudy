@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SideMenu: View {
-    @ObservedObject var sideMenuNav: NavigationVM
+    @ObservedObject var navigationController: NavigationVM
     @ObservedObject var dataVisual: DataVisuals
     // Grid-Single Toggle Selection
     @State private var pickerSelection = 0
@@ -19,12 +19,12 @@ struct SideMenu: View {
                 Spacer()
                 Image(systemName: "line.3.horizontal")
                     .font(.title)
-                    .rotationEffect(Angle(degrees: sideMenuNav.sideMenuStatus == .menuOpen ? 90:0))
+                    .rotationEffect(Angle(degrees: navigationController.sideMenuStatus == .menuOpen ? 90:0))
                     .padding(.top, 13).padding(.trailing)
                     .onTapGesture {
                         withAnimation(.easeInOut) {
-                            sideMenuNav.closeMenu()
-                            sideMenuNav.showTabBar()
+                            navigationController.closeMenu()
+                            navigationController.showTabBar()
                         }
                     }
             }
@@ -57,8 +57,8 @@ struct SideMenu: View {
                             .padding(.top)
                             .onTapGesture {
                                 // Navigation switches activated
-                                sideMenuNav.openSubsPage()
-                                sideMenuNav.closeMenu()
+                                navigationController.openSubsPage()
+                                navigationController.closeMenu()
                             }
                         Spacer()
                     }
@@ -82,6 +82,6 @@ struct SideMenu: View {
 
 struct SideMenu_Previews: PreviewProvider {
     static var previews: some View {
-        SideMenu(sideMenuNav: NavigationVM(), dataVisual: DataVisuals())
+        SideMenu(navigationController: NavigationVM(), dataVisual: DataVisuals())
     }
 }
