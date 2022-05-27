@@ -75,6 +75,8 @@
 		23EA50CA283E49E1008DC259 = {
 			isa = PBXGroup;
 			children = (
+				2327CB1D28404DD300E34361 /* README.md */,
+				2327CB1A28404DB500E34361 /* images */,
 				23EA50D5283E49E1008DC259 /* CaseStudy */,
 				23EA50D4283E49E1008DC259 /* Products */,
 			);
@@ -91,7 +93,6 @@
 		23EA50D5283E49E1008DC259 /* CaseStudy */ = {
 			isa = PBXGroup;
 			children = (
-				2327CB1A28404DB500E34361 /* images */,
 				23EA50EF283E4ECA008DC259 /* Info.plist */,
 				23EA50E6283E4A17008DC259 /* Model */,
 				23EA50E5283E4A12008DC259 /* ViewModel */,
@@ -100,7 +101,6 @@
 				23EA50D8283E49E1008DC259 /* ContentView.swift */,
 				23EA50DA283E49E3008DC259 /* Assets.xcassets */,
 				23EA50DC283E49E3008DC259 /* Preview Content */,
-				2327CB1D28404DD300E34361 /* README.md */,
 			);
 			path = CaseStudy;
 			sourceTree = "<group>";
