@@ -39,43 +39,11 @@ struct TabBarNavigator: View {
             
             // User page selection is done here
             if !navigationController.tabBarHidden {
-                VStack {
-                    HStack {
-                        // For home view
-                        Image(systemName: navigationController.mainTabSelection == .homeView ? "house.fill":"house")
-                            .foregroundColor(navigationController.mainTabSelection == .homeView ? .black:.gray)
-                            .onTapGesture {
-                                navigationController.setHome()
-                            }
-                        Spacer()
-                        // For second view (addPage)
-                        Image(systemName: navigationController.mainTabSelection == .newPost ? "square.grid.2x2.fill":"square.grid.2x2")
-                            .foregroundColor(navigationController.mainTabSelection == .newPost ? .black:.gray)
-                            .onTapGesture {
-                                navigationController.setNewPost()
-                            }
-                        Spacer()
-                        // For third view (liked)
-                        Image(systemName: navigationController.mainTabSelection == .liked ? "heart.fill":"heart")
-                            .foregroundColor(navigationController.mainTabSelection == .liked ? .black:.gray)
-                            .onTapGesture {
-                                navigationController.setLiked()
-                            }
-                    }.padding(.bottom)
-                }
-                .font(.system(size: 30))
-                .foregroundColor(.black)
-                .padding(.horizontal, 50)
-                .frame(width: UIScreen.main.bounds.width, height: 100)
-                // Did not use materials since the guide screenshot looked like white color w/ opacity
-                .background(.white.opacity(0.7)) // or .ultraThinMaterial >> for a different look maybe?
-                .cornerRadius(50)
-                .transition(AnyTransition.scale.animation(.easeInOut))  // The TabBar scales to hide/show itself
+                pageSelector
             }
             
             // When Side Menu is open, the rest of the view is slightly faded black with a smooth animation
-            Rectangle().fill(.black.opacity(navigationController.sideMenuStatus == .menuOpen ? 0.2:0))
-                .ignoresSafeArea()
+            SlightDarker
                 .onTapGesture {
                     if navigationController.sideMenuStatus == .menuOpen {
                         withAnimation(.easeInOut) {
@@ -101,5 +69,49 @@ struct TabBarNavigator: View {
 struct TabBarNavigator_Previews: PreviewProvider {
     static var previews: some View {
         TabBarNavigator()
+    }
+}
+
+
+
+extension TabBarNavigator {
+    var pageSelector: some View {
+        VStack {
+            HStack {
+                // For home view
+                Image(systemName: navigationController.mainTabSelection == .homeView ? "house.fill":"house")
+                    .foregroundColor(navigationController.mainTabSelection == .homeView ? .black:.gray)
+                    .onTapGesture {
+                        navigationController.setHome()
+                    }
+                Spacer()
+                // For second view (addPage)
+                Image(systemName: navigationController.mainTabSelection == .newPost ? "square.grid.2x2.fill":"square.grid.2x2")
+                    .foregroundColor(navigationController.mainTabSelection == .newPost ? .black:.gray)
+                    .onTapGesture {
+                        navigationController.setNewPost()
+                    }
+                Spacer()
+                // For third view (liked)
+                Image(systemName: navigationController.mainTabSelection == .liked ? "heart.fill":"heart")
+                    .foregroundColor(navigationController.mainTabSelection == .liked ? .black:.gray)
+                    .onTapGesture {
+                        navigationController.setLiked()
+                    }
+            }.padding(.bottom)
+        }
+        .font(.system(size: 30))
+        .foregroundColor(.black)
+        .padding(.horizontal, 50)
+        .frame(width: UIScreen.main.bounds.width, height: 100)
+        // Did not use materials since the guide screenshot looked like white color w/ opacity
+        .background(.white.opacity(0.7)) // or .ultraThinMaterial >> for a different look maybe?
+        .cornerRadius(50)
+        .transition(AnyTransition.scale.animation(.easeInOut))  // The TabBar scales to hide/show itself
+    }
+    
+    var SlightDarker: some View {
+        Rectangle().fill(.black.opacity(navigationController.sideMenuStatus == .menuOpen ? 0.2:0))
+            .ignoresSafeArea()
     }
 }
