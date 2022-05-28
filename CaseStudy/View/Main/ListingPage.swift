@@ -13,6 +13,7 @@ struct ListingPage: View {
     @State private var selectedCategory = "Birthday"
     @ObservedObject var navigationController: NavigationVM
     @ObservedObject var dataVisual: DataVisuals
+    @Namespace var capsuleNS
     
     // Grid
     let columns: [GridItem] = [GridItem(.flexible(), spacing: -20, alignment: .center),
@@ -108,8 +109,11 @@ extension ListingPage {
                                         dataVM.showDesiredCategoryTemplates(category: category)
                                     }
                                 }
-                            Capsule().fill(selectedCategory == category ? .black:.clear)
-                                .frame(height: 1)
+                            if selectedCategory == category {
+                                Capsule().fill(selectedCategory == category ? .black:.clear)
+                                    .frame(height: 1)
+                                    .matchedGeometryEffect(id: "capsule", in: capsuleNS)
+                            }
                         }
                         .padding(.bottom, 20)
                     }
