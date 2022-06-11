@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2312EBE7283ECB3400547FC2 /* SubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2312EBE6283ECB3400547FC2 /* SubscriptionModel.swift */; };
+		23160A192854DDF400B54345 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23160A182854DDF400B54345 /* Cart.swift */; };
+		23160A1D2854E3FE00B54345 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23160A1C2854E3FE00B54345 /* CartView.swift */; };
+		23160A1F2854E70700B54345 /* SingleCartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23160A1E2854E70700B54345 /* SingleCartItem.swift */; };
 		231C4386283F8B2A00DF27CE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 231C4385283F8B2A00DF27CE /* Launch Screen.storyboard */; };
 		2327CB1C28404DC200E34361 /* caseImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2327CB1B28404DC200E34361 /* caseImg.png */; };
 		238799A7283E5AF00075FFF0 /* CoverImageComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238799A6283E5AF00075FFF0 /* CoverImageComp.swift */; };
@@ -30,6 +33,9 @@
 
 /* Begin PBXFileReference section */
 		2312EBE6283ECB3400547FC2 /* SubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModel.swift; sourceTree = "<group>"; };
+		23160A182854DDF400B54345 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		23160A1C2854E3FE00B54345 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		23160A1E2854E70700B54345 /* SingleCartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCartItem.swift; sourceTree = "<group>"; };
 		231C4385283F8B2A00DF27CE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2327CB1B28404DC200E34361 /* caseImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = caseImg.png; sourceTree = "<group>"; };
 		2327CB1D28404DD300E34361 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 			children = (
 				23EA50E9283E4A71008DC259 /* Template.swift */,
 				2312EBE6283ECB3400547FC2 /* SubscriptionModel.swift */,
+				23160A182854DDF400B54345 /* Cart.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -147,6 +154,7 @@
 				23EA50ED283E4D6F008DC259 /* ListingPage.swift */,
 				23A67029283E6BDF009B9951 /* DetailsPage.swift */,
 				23A67031283E8A72009B9951 /* SubscriptionPage.swift */,
+				23160A1C2854E3FE00B54345 /* CartView.swift */,
 				231C4385283F8B2A00DF27CE /* Launch Screen.storyboard */,
 			);
 			path = Main;
@@ -158,6 +166,7 @@
 				238799A6283E5AF00075FFF0 /* CoverImageComp.swift */,
 				23A6702F283E7406009B9951 /* SideMenu.swift */,
 				23A67036283EA5DA009B9951 /* ImageComp.swift */,
+				23160A1E2854E70700B54345 /* SingleCartItem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -242,14 +251,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23160A1D2854E3FE00B54345 /* CartView.swift in Sources */,
 				2312EBE7283ECB3400547FC2 /* SubscriptionModel.swift in Sources */,
 				23A6702E283E6F5F009B9951 /* Navigation.swift in Sources */,
 				23EA50EE283E4D6F008DC259 /* ListingPage.swift in Sources */,
+				23160A192854DDF400B54345 /* Cart.swift in Sources */,
 				23EA50EC283E4C1D008DC259 /* DataViewModel.swift in Sources */,
 				23EA50EA283E4A71008DC259 /* Template.swift in Sources */,
 				23A67037283EA5DA009B9951 /* ImageComp.swift in Sources */,
 				23EA50D9283E49E1008DC259 /* ContentView.swift in Sources */,
 				23A67032283E8A72009B9951 /* SubscriptionPage.swift in Sources */,
+				23160A1F2854E70700B54345 /* SingleCartItem.swift in Sources */,
 				23A6702A283E6BDF009B9951 /* DetailsPage.swift in Sources */,
 				238799A7283E5AF00075FFF0 /* CoverImageComp.swift in Sources */,
 				23A67030283E7406009B9951 /* SideMenu.swift in Sources */,

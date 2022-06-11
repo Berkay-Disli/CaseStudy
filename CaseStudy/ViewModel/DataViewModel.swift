@@ -18,6 +18,8 @@ class DataViewModel: ObservableObject {
     @Published var detailImages = [CanvasImages]()
     // Clicked template
     @Published var detailedTemplate = Template(templateCoverImageUrlString: "", section: "Colors", isFree: true, canvasImages: [CanvasImages(frame1080x1920Model: FrameModel(width: 0, height: 0, x: 0, y: 0), defaultImageString: "")])
+    // Cart Items
+    @Published var cartItems = [Template]()
     
     // Simple way to filter UNIQUE categories, >> This way there will only be 1 element for 1 category.
     private var categoriesSet = Set<String>()   // Used in setCategories
@@ -89,6 +91,13 @@ class DataViewModel: ObservableObject {
         // Function takes 'template' argument and sets detailedTemplate to that argument.
         detailedTemplate = template
     }
-
+    
+    func cartClicked(template: Template) {
+        if !cartItems.contains(template) {
+            cartItems.append(template)
+        } else {
+            cartItems = cartItems.filter { $0 != template }
+        }
+    }
     
 }

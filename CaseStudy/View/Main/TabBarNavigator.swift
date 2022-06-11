@@ -21,13 +21,10 @@ struct TabBarNavigator: View {
             case .homeView:
                 ListingPage(navigationController: navigationController, dataVisual: dataVisual)
                     .transition(AnyTransition.opacity.animation(.easeInOut))
-            case .newPost:  // No function - page name is irrelevant
-                VStack {
-                    Spacer()
-                    Text("New Post")
-                        .transition(AnyTransition.opacity.animation(.easeInOut))
-                    Spacer()
-                }
+            case .cart:  // No function - page name is irrelevant
+                CartView()
+                    .padding(.top, 28)
+                    .transition(AnyTransition.opacity.animation(.easeInOut))
             case .liked:    // No function - page name is irrelevant
                 VStack {
                     Spacer()
@@ -86,10 +83,10 @@ extension TabBarNavigator {
                     }
                 Spacer()
                 // For second view (addPage)
-                Image(systemName: navigationController.mainTabSelection == .newPost ? "square.grid.2x2.fill":"square.grid.2x2")
-                    .foregroundColor(navigationController.mainTabSelection == .newPost ? .black:.gray)
+                Image(systemName: navigationController.mainTabSelection == .cart ? "cart.fill":"cart")
+                    .foregroundColor(navigationController.mainTabSelection == .cart ? .black:.gray)
                     .onTapGesture {
-                        navigationController.setNewPost()
+                        navigationController.setCart()
                     }
                 Spacer()
                 // For third view (liked)

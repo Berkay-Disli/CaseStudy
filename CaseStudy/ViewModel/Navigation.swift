@@ -55,8 +55,8 @@ class NavigationVM: ObservableObject {
         mainTabSelection = .homeView
     }
     
-    func setNewPost() {
-        mainTabSelection = .newPost
+    func setCart() {
+        mainTabSelection = .cart
     }
     
     func setLiked() {
@@ -88,14 +88,14 @@ class NavigationVM: ObservableObject {
 
 
 enum Navigation: Int, CaseIterable {
-    case homeView, newPost, liked
+    case homeView, cart, liked
     
     // There are 3 tabBar pages
     var selectedPage: Int {
         switch self {
         case .homeView:
             return 0
-        case .newPost:
+        case .cart:
             return 1
         case .liked:
             return 2

@@ -77,10 +77,16 @@ extension DetailsPage {
                         .transition(AnyTransition.scale.animation(.easeInOut))
                 }
             } else {
-                Text("Free")
-                    .bold()
-                    .foregroundColor(.pink)
-                    .transition(AnyTransition.scale.animation(.easeInOut))
+                // TASK: if added to cart, change symbol
+                Button {
+                    // add to chart
+                    dataVM.cartClicked(template: dataVM.detailedTemplate)
+                } label: {
+                    Image(systemName: "cart.badge.plus")
+                        .font(.title2)
+                        .foregroundColor(.pink)
+                        .transition(AnyTransition.scale.animation(.easeInOut))
+                }
             }
         }
         .padding(.horizontal)
@@ -89,7 +95,7 @@ extension DetailsPage {
     
     var popup: some View {
         VStack {
-            // When tappe, it slides up to show popup
+            // When tapped, it slides up to show popup
             VStack(spacing: 4) {
                 Text("Image Details")
                 Image(systemName: navigationController.showBottomPopup ? "chevron.down":"chevron.up")
