@@ -8,25 +8,42 @@
 import SwiftUI
 
 struct CartView: View {
-    @
+    @EnvironmentObject var dataVM: DataViewModel
     var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Text("My Cart")
                 Spacer()
-                Image(systemName: "cart.badge.minus")
+                Button {
+                    // clear cart with animation
+                    withAnimation(.easeInOut) {
+                        dataVM.emptyCart()
+                    }
+                } label: {
+                    Image(systemName: "cart.badge.minus")
+                }
+
             }
             .font(.title2)
             .foregroundColor(.pink)
             .padding()
             
             
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    ForEach(1...5, id: \.self) { item in
-                        SingleCartItem(template: <#Template#>)
+            if !dataVM.cartItems.isEmpty {
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach(dataVM.cartItems, id: \.self) { item in
+                            SingleCartItem(template: item)
+                        }
                     }
                 }
+            } else {
+                Spacer()
+                Text("Your cart is empty! 🥳")
+                    .font(.largeTitle)
+                    .foregroundColor(.pink)
+                    .transition(AnyTransition.scale.animation(.easeInOut))
+                    Spacer()
             }
             
             Spacer()
@@ -37,5 +54,6 @@ struct CartView: View {
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
         CartView()
+            .environmentObject(DataViewModel())
     }
 }

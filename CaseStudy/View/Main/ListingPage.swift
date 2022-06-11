@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListingPage: View {
-    @StateObject var dataVM = DataViewModel()
+    @EnvironmentObject var dataVM: DataViewModel
     // Select categories
     @State private var selectedCategory = "Birthday"
     @ObservedObject var navigationController: NavigationVM
@@ -25,7 +25,7 @@ struct ListingPage: View {
                 
                 // Hidden navigationlinks with no label
                 NavigationLink(destination: SubscriptionPage(), isActive: $navigationController.subscriptionPage) { }
-                NavigationLink(destination: DetailsPage(dataVM: dataVM, navigationController: navigationController), isActive: $navigationController.detailsPage) { }
+                NavigationLink(destination: DetailsPage(navigationController: navigationController), isActive: $navigationController.detailsPage) { }
                 
                 VStack {
                     // Header
@@ -60,6 +60,7 @@ struct ListingPage: View {
 struct ListingPage_Previews: PreviewProvider {
     static var previews: some View {
         ListingPage(navigationController: NavigationVM(), dataVisual: DataVisuals())
+            .environmentObject(DataViewModel())
     }
 }
 

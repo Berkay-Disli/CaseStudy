@@ -11,7 +11,7 @@ import SwiftUIPager
 struct DetailsPage: View {
     //@State private var selectedImage = 0
     @StateObject var page: Page = .first()
-    @ObservedObject var dataVM: DataViewModel
+    @EnvironmentObject var dataVM: DataViewModel
     @ObservedObject var navigationController: NavigationVM
     @Environment(\.dismiss) var dismiss
     @State private var index = 0
@@ -48,7 +48,8 @@ struct DetailsPage: View {
 
 struct DetailsPage_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsPage(dataVM: DataViewModel(), navigationController: NavigationVM())
+        DetailsPage(navigationController: NavigationVM())
+            .environmentObject(DataViewModel())
     }
 }
 
@@ -82,7 +83,7 @@ extension DetailsPage {
                     // add to chart
                     dataVM.cartClicked(template: dataVM.detailedTemplate)
                 } label: {
-                    Image(systemName: "cart.badge.plus")
+                    Image(systemName: dataVM.cartItems.contains(dataVM.detailedTemplate) ? "cart.fill.badge.minus":"cart.badge.plus")
                         .font(.title2)
                         .foregroundColor(.pink)
                         .transition(AnyTransition.scale.animation(.easeInOut))

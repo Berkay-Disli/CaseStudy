@@ -12,6 +12,7 @@ struct CaseStudyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(DataViewModel())
         }
     }
 }

@@ -66,6 +66,7 @@ struct TabBarNavigator: View {
 struct TabBarNavigator_Previews: PreviewProvider {
     static var previews: some View {
         TabBarNavigator()
+            .environmentObject(DataViewModel())
     }
 }
 

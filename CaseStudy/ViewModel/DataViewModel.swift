@@ -100,4 +100,7 @@ class DataViewModel: ObservableObject {
         }
     }
     
+    func emptyCart() {
+        cartItems.removeAll(keepingCapacity: false)
+    }
 }
