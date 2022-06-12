@@ -29,7 +29,6 @@ struct DetailsPage: View {
             }
             .onPageChanged({ index in
                 self.index = index
-                print(dataVM.detailedTemplate.canvasImages)
             })
             .loopPages()
             

@@ -13,46 +13,15 @@ struct SingleCartItem: View {
     
     var body: some View {
         VStack {
-            HStack {
-                if let image = template.templateCoverImageUrlString {
-                    KFImage(URL(string: image))
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 190)
-                }
-                
-                
-                VStack(alignment: .trailing, spacing: 0) {
-                    if let section = template.section {
-                        Text(section)
-                            .font(.system(size: 40)).bold()
-                            .lineLimit(2)
-                            .frame(width: 200, alignment: .trailing)
-                    }
-                    
-                    Button {
-                        // download except the cover image
-                    } label: {
-                        Text("Download 😏")
-                            .font(.title2).foregroundColor(.pink)
-                            .fixedSize()
-                            
-                            .padding(.top)
-                    }
-
-                }
-                
-                Spacer()
-                Rectangle().fill(LinearGradient(colors: [.pink, .pink, .orange], startPoint: .top, endPoint: .bottom))
-                    
-                    .frame(width: 30 ,height: 190)
-                    
-            }
-            .padding([.top, .bottom, .leading])
+            KFImage(URL(string: template.templateCoverImageUrlString ?? ""))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: UIScreen.main.bounds.width * 0.7)
             
-            Divider()
+            Text(template.section?.uppercased() ?? "")
+                .font(.largeTitle).bold()
         }
-        
+        .padding(.bottom)
     }
 }
 

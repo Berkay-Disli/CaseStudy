@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import SwiftUIPager
 
 struct CartView: View {
     @EnvironmentObject var dataVM: DataViewModel
+    @StateObject var page: Page = .first()
+    @State private var index = 0
+
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -30,13 +34,15 @@ struct CartView: View {
             
             
             if !dataVM.cartItems.isEmpty {
-                ScrollView {
-                    LazyVStack(spacing: 0) {
-                        ForEach(dataVM.cartItems, id: \.self) { item in
-                            SingleCartItem(template: item)
-                        }
+                Pager(page: page, data: dataVM.cartItems, id: \.self) { template in
+                    if let imgStr = template.templateCoverImageUrlString {
+                        SingleCartItem(template: template)
                     }
                 }
+                .onPageChanged({ index in
+                    self.index = index
+                })
+                .loopPages()
             } else {
                 Spacer()
                 Text("Your cart is empty! 🥳")

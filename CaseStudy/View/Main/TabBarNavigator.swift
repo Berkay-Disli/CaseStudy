@@ -83,7 +83,7 @@ extension TabBarNavigator {
                         navigationController.setHome()
                     }
                 Spacer()
-                // For second view (addPage)
+                // For second view (Cart)
                 Image(systemName: navigationController.mainTabSelection == .cart ? "cart.fill":"cart")
                     .foregroundColor(navigationController.mainTabSelection == .cart ? .black:.gray)
                     .onTapGesture {
