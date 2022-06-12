@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBarNavigator: View {
-    
+    @EnvironmentObject var dataVM: DataViewModel
     @StateObject var navigationController = NavigationVM()
     @StateObject var dataVisual = DataVisuals()
     
@@ -84,11 +84,23 @@ extension TabBarNavigator {
                     }
                 Spacer()
                 // For second view (Cart)
-                Image(systemName: navigationController.mainTabSelection == .cart ? "cart.fill":"cart")
-                    .foregroundColor(navigationController.mainTabSelection == .cart ? .black:.gray)
-                    .onTapGesture {
-                        navigationController.setCart()
+                ZStack(alignment: .topTrailing) {
+                    Image(systemName: navigationController.mainTabSelection == .cart ? "cart.fill":"cart")
+                        .foregroundColor(navigationController.mainTabSelection == .cart ? .black:.gray)
+                        .onTapGesture {
+                            navigationController.setCart()
                     }
+                    
+                    if dataVM.cartItems.count != 0 {
+                        Text("\(dataVM.cartItems.count)")
+                            .bold()
+                            .font(.callout).foregroundColor(.white)
+                            .padding(5) // if bigger than 9, change the size..
+                            .background(Circle().fill(.pink))
+                            .offset(x: 10, y: -10)
+                    }
+                    
+                }
                 Spacer()
                 // For third view (liked)
                 Image(systemName: navigationController.mainTabSelection == .liked ? "heart.fill":"heart")

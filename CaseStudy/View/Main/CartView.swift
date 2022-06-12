@@ -35,9 +35,7 @@ struct CartView: View {
             
             if !dataVM.cartItems.isEmpty {
                 Pager(page: page, data: dataVM.cartItems, id: \.self) { template in
-                    if let imgStr = template.templateCoverImageUrlString {
-                        SingleCartItem(template: template)
-                    }
+                    SingleCartItem(template: template)
                 }
                 .onPageChanged({ index in
                     self.index = index
